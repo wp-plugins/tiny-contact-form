@@ -10,6 +10,7 @@ Little form that allows site visitors to contact you.
 
 == Description ==
 
+Little form that allows site visitors to contact you.
 Use '[TINY-CONTACT-FORM]' within any post or page.
 
 == Installation ==
