@@ -71,7 +71,8 @@ function replace_tcf_tag()
 
 		$headers =
 		"MIME-Version: 1.0\r\n".
-		"From: $name <$from>\r\n".
+		"From: $name - ".get_bloginfo('name'). " <$from>\r\n".
+		"Reply-To: \"$name\" <$email>\r\n".
 		"Content-Type: text/plain; charset=\"" . get_settings('blog_charset') . "\"\r\n";
 
 		$fullmsg =
