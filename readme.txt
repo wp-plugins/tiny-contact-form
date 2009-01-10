@@ -22,7 +22,7 @@ Add the widget to your sidebar.
 == Frequently Asked Questions ==
 
 = How to style? =
-- The complete form is surrounded by a '<div class="contactform">'. Tags in FORM: LABEL, INPUT and TEXTAREA.
+- The complete form is surrounded by a 'div class="contactform"'. Tags in FORM: LABEL, INPUT and TEXTAREA.
 - To change the form style in your sidebar you can use '.widget .contactform' (plus tags above) in your template 'style.css'.
 
 = Need Help? Find Bug? =
