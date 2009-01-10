@@ -56,39 +56,11 @@ function tcf_check_input()
  */
 function replace_tcf_tag()
 {
-	$result = tcf_check_input();
-		
-    if ( $result == 'OK' )
-    {
-    	$result = '';
-    	// send mail
-    	$from		= get_option('admin_email'); 
-		$to			= get_option('tcf_to_email');
-		$name		= $_POST['tcf_sender'];
-		$email		= $_POST['tcf_email'];
-		$subject	= $_POST['tcf_subject'].' - '.get_bloginfo('name').' - Tiny Contact Form';
-		$msg		= $_POST['tcf_msg'];
-
-		$headers =
-		"MIME-Version: 1.0\r\n".
-		"From: $name - ".get_bloginfo('name'). " <$from>\r\n".
-		"Reply-To: \"$name\" <$email>\r\n".
-		"Content-Type: text/plain; charset=\"" . get_settings('blog_charset') . "\"\r\n";
-
-		$fullmsg =
-		'Name...: '.$name."\r\n".
-		'Email..: '.$email."\r\n\r\n".
-		'Betreff: '.$_POST['tcf_subject']."\r\n\r\n".
-		wordwrap($msg, 76, "\r\n")."\r\n\r\n".
-		'Browser: '.$_SERVER['HTTP_USER_AGENT']."\r\n";
-		
-		if ( mail( $to, $subject, $fullmsg, $headers ) )
-			$result = 'Thank you for the message!';
-    }
-
+	$result = tcf_send_mail();
+	
     // show form
 	if ( !empty($result) )
-	$result = '<p class="contacterror">'.$result.'</p>';
+		$result = '<p class="contacterror">'.$result.'</p>';
 
 	$form = '
 	<div class="contactform" id="tcform">'
@@ -129,6 +101,47 @@ add_shortcode('TINY-CONTACT-FORM', 'tcf_shortcode');
 
 
 /**
+ * send mail
+ * 
+ * @return string Result, Message
+ */
+function tcf_send_mail()
+{
+	$result = tcf_check_input();
+		
+    if ( $result == 'OK' )
+    {
+    	$result = '';
+    	// send mail
+    	$from		= get_option('admin_email'); 
+		$to			= get_option('tcf_to_email');
+		$name		= $_POST['tcf_sender'];
+		$email		= $_POST['tcf_email'];
+		$subject	= $_POST['tcf_subject'].' - '.get_bloginfo('name').' - Tiny Contact Form';
+		$msg		= $_POST['tcf_msg'];
+
+		$headers =
+		"MIME-Version: 1.0\r\n".
+		"From: $name - ".get_bloginfo('name'). " <$from>\r\n".
+		"Reply-To: \"$name\" <$email>\r\n".
+		"Content-Type: text/plain; charset=\"" . get_settings('blog_charset') . "\"\r\n";
+
+		$fullmsg =
+		'Name...: '.$name."\r\n".
+		'Email..: '.$email."\r\n\r\n".
+		'Betreff: '.$_POST['tcf_subject']."\r\n\r\n".
+		wordwrap($msg, 76, "\r\n")."\r\n\r\n".
+		'Browser: '.$_SERVER['HTTP_USER_AGENT']."\r\n";
+		
+		if ( mail( $to, $subject, $fullmsg, $headers ) )
+			$result = 'Thank you for the message!';
+    }
+    return $result;
+}
+
+
+
+/**
  * shows options page
  */
 function tcf_options_page()
@@ -163,6 +176,29 @@ function tcf_options_page()
 	</div>
 	<?php
 }
+
+
+
+/**
+ * widget
+ */
+function widget_tcf_init()
+{
+	if (! function_exists('register_sidebar_widget'))
+		return;
+	
+	function widget_tcf($args)
+	{
+		extract($args);
+		echo $before_widget;
+		echo $before_title.'Tiny Contact Form'.$after_title;
+		echo replace_tcf_tag();
+		echo $after_widget;
+	}
+	register_sidebar_widget('Tiny Contact Form', 'widget_tcf');
+}
+
+add_action('plugins_loaded', 'widget_tcf_init');
 
 
 
