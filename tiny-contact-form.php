@@ -76,7 +76,7 @@ function replace_tcf_tag()
 	<input name="tcf_subject" id="tcf_subject" size="30" value="'.$_POST['tcf_subject'].'" />
 	<label for="tcf_msg">'.__('Message').':</label>
 	<textarea name="tcf_msg" id="tcf_msg" cols="50" rows="10">'.$_POST['tcf_msg'].'</textarea>
-	<input type="submit" name="submit" value="abschicken" id="contactsubmit" />
+	<input type="submit" name="submit" id="contactsubmit" />
 	</form>
 	</div>
 	';
