@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tiny Contact Form v0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-13 23:10+0100\n"
+"PO-Revision-Date: 2009-01-13 23:10+0100\n"
+"Last-Translator: Tom Braider <post@tomsdimension.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+": \n"
+"X-Poedit-SearchPath-0: ."
+
+#: tiny-contact-form.php:38
+#: tiny-contact-form.php:268
+msgid "Name"
+msgstr "Name"
+
+#: tiny-contact-form.php:40
+#: tiny-contact-form.php:270
+msgid "Email"
+msgstr "Email"
+
+#: tiny-contact-form.php:42
+#: tiny-contact-form.php:272
+msgid "Subject"
+msgstr "Betreff"
+
+#: tiny-contact-form.php:44
+#: tiny-contact-form.php:274
+msgid "Your Message"
+msgstr "Deine Nachricht"
+
+#: tiny-contact-form.php:114
+msgid "Sorry, but you have no permissions to change settings."
+msgstr "Du hast keine Berechtigungen diese Einstellungen zu ändern."
+
+#: tiny-contact-form.php:149
+msgid "TO:"
+msgstr "Empfänger:"
+
+#: tiny-contact-form.php:150
+#: tiny-contact-form.php:154
+msgid "E-mail"
+msgstr "E-mail"
+
+#: tiny-contact-form.php:153
+msgid "FROM:"
+msgstr "Absender:"
+
+#: tiny-contact-form.php:154
+msgid "(optional)"
+msgstr "(optional)"
+
+#: tiny-contact-form.php:157
+msgid "Message OK:"
+msgstr "Erfolgsmeldung:"
+
+#: tiny-contact-form.php:161
+msgid "Message Error:"
+msgstr "Fehlermeldung:"
+
+#: tiny-contact-form.php:166
+msgid "StyleSheet:"
+msgstr "StyleSheet:"
+
+#: tiny-contact-form.php:176
+msgid "Save Changes"
+msgstr "Einstellungen speichern"
+
+#: tiny-contact-form.php:276
+msgid "Check these fields:"
+msgstr "Überprüfe die Felder:"
+
+#: tiny-contact-form.php:167
+msgid "reset"
+msgstr "zurücksetzen"
+
+#: tiny-contact-form.php:171
+msgid "Use this field or the <code>style.css</code> in your theme directory."
+msgstr "Benutze dieses Feld oder die <code>style.css</code> in deinem Theme-Verzeichnis."
+

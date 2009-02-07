@@ -4,7 +4,7 @@ Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.0
 Tested up to: 2.7
-Stable tag: 0.2
+Stable tag: 0.3
 
 Little form that allows site visitors to contact you.
 
@@ -18,12 +18,14 @@ Add the widget to your sidebar.
 1. unzip plugin directory into the '/wp-content/plugins/' directory
 1. activate the plugin through the 'Plugins' menu in WordPress
 1. insert '[TINY-CONTACT-FORM]' in your page or/and add the widget to your sidebar
+1. check the settings (email, messages, style) in backend
 
 == Frequently Asked Questions ==
 
 = How to style? =
-- The complete form is surrounded by a 'div class="contactform"'. Tags in FORM: LABEL, INPUT and TEXTAREA.
+- The complete form is surrounded by a '<div class="contactform">'. Tags in FORM: LABEL, INPUT and TEXTAREA.
 - To change the form style in your sidebar you can use '.widget .contactform' (plus tags above) in your template 'style.css'.
+- Since v0.3 you can use the settings.
 
 = Need Help? Find Bug? =
 read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-contact-form">plugin page</a>
@@ -32,14 +34,23 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 
 1. contact form on page
 2. contact form widget in sidebar
+3. settings page
 
 == Arbitrary section ==
 
 **Filelist**
 
 * tiny-contact-form.php
+* locale/tcf-lang-de_DE.mo
+* locale/tcf-lang-de_DE.po
 
 **Changelog**
+
+_Version 0.3_
+
++ new: more user settings
++ new: language support (english, german)
++ change to wp_mail()
 
 _Version 0.2_
 
