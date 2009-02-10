@@ -4,7 +4,7 @@ Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.0
 Tested up to: 2.7
-Stable tag: 0.3
+Stable tag: 0.3.1
 
 Little form that allows site visitors to contact you.
 
@@ -38,13 +38,25 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 
 == Arbitrary section ==
 
+**Silent Helper**
+Jay Shergill http://www.pdrater.com
+
+**Translations**
+de: me ;)
+hr, it: Alen Širola http://www.gloriatours.hr
+
 **Filelist**
 
 * tiny-contact-form.php
-* locale/tcf-lang-de_DE.mo
 * locale/tcf-lang-de_DE.po
+* locale/tcf-lang-hr_HR.po
+* locale/tcf-lang-it_IT.po
 
 **Changelog**
+
+_Version 0.3.1_
+
++ new translations: hr and it, thanks Alen
 
 _Version 0.3_
 
