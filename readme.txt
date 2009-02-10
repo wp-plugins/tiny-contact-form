@@ -39,11 +39,13 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 == Arbitrary section ==
 
 **Silent Helper**
-Jay Shergill http://www.pdrater.com
+
+* Jay Shergill http://www.pdrater.com
 
 **Translations**
-de: me ;)
-hr, it: Alen Širola http://www.gloriatours.hr
+
+* de: me ;)
+* hr, it: Alen Širola http://www.gloriatours.hr
 
 **Filelist**
 
