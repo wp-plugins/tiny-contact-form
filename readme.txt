@@ -57,6 +57,10 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 
 **Changelog**
 
+_Version 0.3.2_
+
++ new translation: es, thanks Jeffrey
+
 _Version 0.3.1_
 
 + new translations: hr and it, thanks Alen
