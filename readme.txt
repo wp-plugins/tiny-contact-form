@@ -54,6 +54,7 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * locale/tcf-lang-de_DE.po
 * locale/tcf-lang-hr_HR.po
 * locale/tcf-lang-it_IT.po
+* locale/tcf-lang-es_ES.po
 
 **Changelog**
 
