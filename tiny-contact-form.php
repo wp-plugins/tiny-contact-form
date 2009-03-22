@@ -5,7 +5,7 @@ Plugin URI: http://www.tomsdimension.de/wp-plugins/tiny-contact-form
 Description: Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page.
 Author: Tom Braider
 Author URI: http://www.tomsdimension.de
-Version: 0.3.2
+Version: 0.4
 
 Silent Helper: Jay Shergill http://www.pdrater.com
 */
@@ -19,8 +19,8 @@ Silent Helper: Jay Shergill http://www.pdrater.com
 function tcf_show_form()
 {
 	$result = tcf_send_mail();
-
 	$o = get_option('tiny_contact_form');
+	$title = (!empty($o['submit'])) ? 'value="'.$o['submit'].'"' : '';
 	
 	if ( $result == $o['msg_ok'] )
 		// mail successfully sent, no form
@@ -45,7 +45,7 @@ function tcf_show_form()
 		<input name="tcf_subject" id="tcf_subject" size="30" value="'.$_POST['tcf_subject'].'" />
 		<label for="tcf_msg">'.__('Your Message', 'tcf-lang').':</label>
 		<textarea name="tcf_msg" id="tcf_msg" cols="50" rows="10">'.$_POST['tcf_msg'].'</textarea>
-		<input type="submit" name="submit" id="contactsubmit" />
+		<input type="submit" name="submit" id="contactsubmit" '.$title.' />
 		</form>
 		</div>';
 	}
@@ -128,6 +128,7 @@ function tcf_options_page()
 		$msg_err = wp_specialchars($_POST['tcf_msg_err']);
 		if ( empty($msg_err) )
 			$msg_err = "Sorry. An error occured while sending the message!";
+		$submit = stripslashes($_POST['tcf_submit']);
 		$css = stripslashes($_POST['tcf_css']);
 		
 		$options = array(
@@ -135,7 +136,8 @@ function tcf_options_page()
 			'from_email'	=> $from,
 			'css'			=> $css,
 			'msg_ok'		=> $msg_ok,
-			'msg_err'		=> $msg_err);
+			'msg_err'		=> $msg_err,
+			'submit'		=> $submit);
 		update_option('tiny_contact_form', $options);
 	}
 		
@@ -162,6 +164,10 @@ function tcf_options_page()
     	<tr>
 			<th><?php _e('Message Error:', 'tcf-lang')?></th>
 			<td><input name="tcf_msg_err" type="text" size="72" value="<?php echo $o['msg_err'] ?>" /></td>
+		</tr>
+		<tr>
+			<th><?php _e('Submit Button:', 'tcf-lang')?></th>
+			<td><input name="tcf_submit" type="text" size="30" value="<?php echo $o['submit'] ?>" /> <?php _e('(optional)'); ?></td>
 		</tr>
     	<tr>
 			<th>
@@ -204,12 +210,28 @@ function widget_tcf_init()
 	function widget_tcf($args)
 	{
 		extract($args);
+		$options = get_option('tiny_contact_form');
+		$title = (!empty($options['widget_title'])) ? $options['widget_title'] : 'Tiny Contact Form';
 		echo $before_widget;
-		echo $before_title.'Tiny Contact Form'.$after_title;
+		echo $before_title.$title.$after_title;
 		echo tcf_show_form();
 		echo $after_widget;
 	}
 	register_sidebar_widget('Tiny Contact Form', 'widget_tcf');
+	
+	function widget_tcf_control()
+	{
+		if ( !empty($_POST['widget_tcf_title']) )
+		{
+			$options = get_option('tiny_contact_form');
+			$options['widget_title'] = stripslashes($_POST['widget_tcf_title']);
+			update_option('tiny_contact_form', $options);
+		}
+		$options = get_option('tiny_contact_form');
+		$title = (!empty($options['widget_title'])) ? $options['widget_title'] : 'Tiny Contact Form';
+		echo '<p style="text-align:right;"><label for="widget_tcf_title">Title: <input style="width: 200px;" id="widget_tcf_title" name="widget_tcf_title" type="text" value="'.$title.'" /></label></p>';
+	}
+	register_widget_control('Tiny Contact Form', 'widget_tcf_control');
 }
 
 add_action('plugins_loaded', 'widget_tcf_init');
@@ -314,4 +336,23 @@ function tcf_add_style()
 		echo "<style type=\"text/css\">\n".$o['css']."\n</style>\n";
 }
 add_action('wp_head', 'tcf_add_style');
+
+
+
+/**
+ * adds an action link to the plugins page
+ */
+function tcf_plugin_actions($links, $file)
+{
+	if( $file == plugin_basename(__FILE__) )
+	{
+		//$link = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/tiny-contact-form.php">'.__('Settings').'</a>';
+		$link = '<a href="options-general.php?page=tiny-contact-form">'.__('Settings').'</a>';
+		array_unshift( $links, $link );
+	}
+	return $links;
+}
+
+add_filter('plugin_action_links', 'tcf_plugin_actions', 10, 2);
+
 ?>

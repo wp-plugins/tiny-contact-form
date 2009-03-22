@@ -4,7 +4,7 @@ Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.0
 Tested up to: 2.7
-Stable tag: 0.3.2
+Stable tag: 0.4
 
 Little form that allows site visitors to contact you.
 
@@ -47,6 +47,7 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * de: myself ;)
 * hr, it: Alen &Scaron;irola http://www.gloriatours.hr
 * es: Jeffrey Borb&oacute;n http://www.eljeffto.com 
+* hu: MaXX http://www.novamaxx.hu
 
 **Filelist**
 
@@ -55,16 +56,25 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * locale/tcf-lang-hr_HR.po
 * locale/tcf-lang-it_IT.po
 * locale/tcf-lang-es_ES.po
+* locale/tcf-lang-hu_HU.po
 
 **Changelog**
 
+_Version 0.4_
+
++ new: custom widget title and submit button
+
+_Version 0.3.3_
+
++ new translation: hungarian, thanks MaXX
+
 _Version 0.3.2_
 
-+ new translation: es, thanks Jeffrey
++ new translation: espanol, thanks Jeffrey
 
 _Version 0.3.1_
 
-+ new translations: hr and it, thanks Alen
++ new translations: hr and italiano, thanks Alen
 
 _Version 0.3_
 
