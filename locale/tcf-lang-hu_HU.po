@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tiny Contact Form magyar fordítás v0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-13 23:10+0100\n"
+"PO-Revision-Date: 2009-03-23 10:17+0100\n"
+"Last-Translator: MaXX <info@novamaxx.hu>\n"
+"Language-Team: MaXX <info@novamaxx.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Hungarian\n"
+"X-Poedit-Country: HUNGARY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
+": \n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: tiny-contact-form.php:38
+#: tiny-contact-form.php:268
+msgid "Name"
+msgstr "név"
+
+#: tiny-contact-form.php:40
+#: tiny-contact-form.php:270
+msgid "Email"
+msgstr "e-mail"
+
+#: tiny-contact-form.php:42
+#: tiny-contact-form.php:272
+msgid "Subject"
+msgstr "tárgy"
+
+#: tiny-contact-form.php:44
+#: tiny-contact-form.php:274
+msgid "Your Message"
+msgstr "üzenet"
+
+#: tiny-contact-form.php:114
+msgid "Sorry, but you have no permissions to change settings."
+msgstr "Sajnos nincs jogosultságod a beállítások módosításához."
+
+#: tiny-contact-form.php:149
+msgid "TO:"
+msgstr "Címzett:"
+
+#: tiny-contact-form.php:150
+#: tiny-contact-form.php:154
+msgid "E-mail"
+msgstr "e-mail"
+
+#: tiny-contact-form.php:153
+msgid "FROM:"
+msgstr "Küldő:"
+
+#: tiny-contact-form.php:154
+msgid "(optional)"
+msgstr "(választható)"
+
+#: tiny-contact-form.php:157
+msgid "Message OK:"
+msgstr "Üzenet rendben:"
+
+#: tiny-contact-form.php:161
+msgid "Message Error:"
+msgstr "Üzenet hiba:"
+
+#: tiny-contact-form.php:166
+msgid "StyleSheet:"
+msgstr "Stíluslap:"
+
+#: tiny-contact-form.php:176
+msgid "Save Changes"
+msgstr "Változások mentése"
+
+#: tiny-contact-form.php:276
+msgid "Check these fields:"
+msgstr "A következő mezők nincsenek kitöltve:"
+
+#: tiny-contact-form.php:167
+msgid "reset"
+msgstr "alaphelyzet"
+
+#: tiny-contact-form.php:171
+msgid "Use this field or the <code>style.css</code> in your theme directory."
+msgstr "használd ezt a mezőt, vagy a <code>style.css</code>-t a témád könyvtárában."
+
+#. Plugin Name of an extension
+msgid "Tiny Contact Form"
+msgstr "Tiny Contact Form"
+
+#. Plugin URI of an extension
+msgid "http://www.tomsdimension.de/wp-plugins/tiny-contact-form"
+msgstr "http://www.tomsdimension.de/wp-plugins/tiny-contact-form"
+
+#. Description of an extension
+msgid "Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page."
+msgstr "Ez az egyszerű bővítmény lehetővé teszi a látogatók számára, hogy kapcsolatba lépjenek Veled. Illeszd be ezt: <strong>[TINY-CONTACT-FORM]</strong> a bejegyzésbe, vagy a lapra. Magyar fordítás: <a href=\"http://novamaxx.hu/tiny-contact-form\" target=\"_blank\">MaXX</a>. "
+
+#. Author of an extension
+msgid "Tom Braider"
+msgstr "Tom Braider"
+
+#. Author URI of an extension
+msgid "http://www.tomsdimension.de"
+msgstr "http://www.tomsdimension.de"
+
