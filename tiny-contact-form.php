@@ -5,7 +5,7 @@ Plugin URI: http://www.tomsdimension.de/wp-plugins/tiny-contact-form
 Description: Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page.
 Author: Tom Braider
 Author URI: http://www.tomsdimension.de
-Version: 0.4.1
+Version: 0.4.2
 
 Silent Helper: Jay Shergill http://www.pdrater.com
 */
@@ -35,8 +35,8 @@ function tcf_show_form()
 		<div class="contactform" id="tcform">
 		'.$result.'
 		<form action="'.get_permalink().'" method="post">
-		<input type="hidden" name="tcf_name" id="tcf_name" value="" />
-		<input type="hidden" name="tcf_sendit" id="tcf_sendit" value="1" />
+		<input name="tcf_name" id="tcf_name" value="" class="tcf_input" />
+		<input name="tcf_sendit" id="tcf_sendit" value="1" class="tcf_input" />
 		<label for="tcf_sender">'.__('Name', 'tcf-lang').':</label>
 		<input name="tcf_sender" id="tcf_sender" size="30" value="'.$_POST['tcf_sender'].'" />
 		<label for="tcf_email">'.__('Email', 'tcf-lang').':</label>
@@ -276,8 +276,8 @@ function tcf_check_input()
 		return false;
 
 	// spam check
-	if ( isset($_POST['tcf_sendit']) && $_POST['tcf_sendit'] != 1
-		&& isset($_POST['tcf_name']) && $_POST['tcf_name'] != '' )
+	if ( (isset($_POST['tcf_sendit']) && $_POST['tcf_sendit'] != 1)
+		|| (isset($_POST['tcf_name']) && $_POST['tcf_name'] != '') )
 	{
 		return 'No Spam please!';
 	}
@@ -332,8 +332,7 @@ if ( function_exists('register_uninstall_hook') )
 function tcf_add_style()
 {
 	$o = get_option('tiny_contact_form');
-	if ( !empty($o['css']) )
-		echo "<style type=\"text/css\">\n".$o['css']."\n</style>\n";
+	echo "<style type=\"text/css\">\n .tcf_input { display:none; }\n".$o['css']."\n</style>\n";
 }
 add_action('wp_head', 'tcf_add_style');
 
