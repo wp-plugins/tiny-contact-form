@@ -4,7 +4,7 @@ Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.0
 Tested up to: 2.7
-Stable tag: 0.4.2
+Stable tag: 0.4.3
 
 Little form that allows site visitors to contact you.
 
@@ -60,6 +60,10 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * locale/tcf-lang-hu_HU.po
 
 **Changelog**
+
+_Version 0.4.3_
+
+# Bugfix: little change in stylesheet to realy hide the "hidden" fields
 
 _Version 0.4.2_
 
