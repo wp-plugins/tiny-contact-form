@@ -5,10 +5,50 @@ Plugin URI: http://www.tomsdimension.de/wp-plugins/tiny-contact-form
 Description: Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page.
 Author: Tom Braider
 Author URI: http://www.tomsdimension.de
-Version: 0.4.3
+Version: 0.5
 
 Silent Helper: Jay Shergill http://www.pdrater.com
 */
+
+
+$tiny_contact_form = new TinyContactForm();
+
+
+class TinyContactForm
+{
+
+var $o; // options
+var $captcha;
+
+
+/**
+ * Constructor
+ */	
+function TinyContactForm()
+{
+	// get options from DB
+	$this->o = get_option('tiny_contact_form');
+	
+	// widget
+	add_action('plugins_loaded', array( &$this, 'widgetTcfInit'));
+	// options page in menu
+	add_action('admin_menu', array( &$this, 'addOptionsPage'));
+	// shortcode
+	add_shortcode('TINY-CONTACT-FORM', array( &$this, 'shortcode'));
+	// add stylesheet
+	add_action('wp_head', array( &$this, 'addStyle'));
+	// uninstall function - since WordPress 2.7
+	if ( function_exists('register_uninstall_hook') )
+		register_uninstall_hook(__FILE__, array( &$this, 'uninstall')); 
+	// settingslink on plugin page
+	add_filter('plugin_action_links', array( &$this, 'pluginActions'), 10, 2);
+	// add locale support
+	if (defined('WPLANG') && function_exists('load_plugin_textdomain'))
+		load_plugin_textdomain('tcf-lang', '', dirname(plugin_basename(__FILE__)).'/locale');
+	// creates image recources
+	$this->setRecources();
+}
+
 
 
 /**
@@ -16,13 +56,15 @@ Silent Helper: Jay Shergill http://www.pdrater.com
  *
  * @return string form code
  */
-function tcf_show_form()
+function showForm()
 {
-	$result = tcf_send_mail();
-	$o = get_option('tiny_contact_form');
-	$title = (!empty($o['submit'])) ? 'value="'.$o['submit'].'"' : '';
+	$result = $this->sendMail();
 	
-	if ( $result == $o['msg_ok'] )
+	$captcha = new TinyContactFormCaptcha( rand(1000000000, 9999999999) );
+	
+	$title = (!empty($this->o['submit'])) ? 'value="'.$this->o['submit'].'"' : '';
+	
+	if ( $result == $this->o['msg_ok'] )
 		// mail successfully sent, no form
 		$form = '<div class="contactform" id="tcform"><p class="contactform_respons">'.$result.'</p></div>';
 	else 
@@ -31,23 +73,30 @@ function tcf_show_form()
 			// error message
 			$result = '<p class="contactform_error">'.$result.'</p>';
 		
+//			'.get_permalink().'
 		$form = '
-		<div class="contactform" id="tcform">
-		'.$result.'
-		<form action="'.get_permalink().'" method="post">
-		<input name="tcf_name" id="tcf_name" value="" class="tcf_input" />
-		<input name="tcf_sendit" id="tcf_sendit" value="1" class="tcf_input" />
-		<label for="tcf_sender">'.__('Name', 'tcf-lang').':</label>
-		<input name="tcf_sender" id="tcf_sender" size="30" value="'.$_POST['tcf_sender'].'" />
-		<label for="tcf_email">'.__('Email', 'tcf-lang').':</label>
-		<input name="tcf_email" id="tcf_email" size="30" value="'.$_POST['tcf_email'].'" />
-		<label for="tcf_subject">'.__('Subject', 'tcf-lang').':</label>
-		<input name="tcf_subject" id="tcf_subject" size="30" value="'.$_POST['tcf_subject'].'" />
-		<label for="tcf_msg">'.__('Your Message', 'tcf-lang').':</label>
-		<textarea name="tcf_msg" id="tcf_msg" cols="50" rows="10">'.$_POST['tcf_msg'].'</textarea>
-		<input type="submit" name="submit" id="contactsubmit" '.$title.' />
-		</form>
-		</div>';
+			<div class="contactform" id="tcform">
+			'.$result.'
+			<form action="" method="post">
+			<div>
+			<input name="tcf_name" id="tcf_name" value="" class="tcf_input" />
+			<input name="tcf_sendit" id="tcf_sendit" value="1" class="tcf_input" />
+			<label for="tcf_sender">'.__('Name', 'tcf-lang').':</label>
+			<input name="tcf_sender" id="tcf_sender" size="30" value="'.$_POST['tcf_sender'].'" />
+			<label for="tcf_email">'.__('Email', 'tcf-lang').':</label>
+			<input name="tcf_email" id="tcf_email" size="30" value="'.$_POST['tcf_email'].'" />
+			<label for="tcf_subject">'.__('Subject', 'tcf-lang').':</label>
+			<input name="tcf_subject" id="tcf_subject" size="30" value="'.$_POST['tcf_subject'].'" />
+			<label for="tcf_msg">'.__('Your Message', 'tcf-lang').':</label>
+			<textarea name="tcf_msg" id="tcf_msg" cols="50" rows="10">'.$_POST['tcf_msg'].'</textarea>
+			';
+		if ( $this->o['captcha'] )
+			$form .= $captcha->getCaptcha();
+		$form .= '	
+			<input type="submit" name="submit" id="contactsubmit" '.$title.' />
+			</div>
+			</form>
+			</div>';
 	}
 	return $form;
 }
@@ -59,23 +108,21 @@ function tcf_show_form()
  * 
  * @return string Result, Message
  */
-function tcf_send_mail()
+function sendMail()
 {
-	$result = tcf_check_input();
+	$result = $this->checkInput();
 		
     if ( $result == 'OK' )
     {
     	$result = '';
     	
-    	// get options
-		$o		= get_option('tiny_contact_form');
-		$to		= $o['to_email'];
-		$from	= $o['from_email'];
+		$to		= $this->o['to_email'];
+		$from	= $this->o['from_email'];
 	
-		$name		= $_POST['tcf_sender'];
-		$email		= $_POST['tcf_email'];
-		$subject	= $_POST['tcf_subject'].' - '.get_bloginfo('name').' - Tiny Contact Form';
-		$msg		= $_POST['tcf_msg'];
+		$name	= $_POST['tcf_sender'];
+		$email	= $_POST['tcf_email'];
+		$subject= $_POST['tcf_subject'].' - '.get_bloginfo('name').' - Tiny Contact Form';
+		$msg	= $_POST['tcf_msg'];
 
 		$headers =
 		"MIME-Version: 1.0\r\n".
@@ -89,6 +136,7 @@ function tcf_send_mail()
 		'Email..: '.$email."\r\n\r\n".
 		'Subject: '.$_POST['tcf_subject']."\r\n\r\n".
 		wordwrap($msg, 76, "\r\n")."\r\n\r\n".
+		'Referer: '.get_permalink()."\r\n".
 		'Browser: '.$_SERVER['HTTP_USER_AGENT']."\r\n";
 		
     	// send mail
@@ -96,11 +144,11 @@ function tcf_send_mail()
 		{
 			// ok
 			unset($_POST);
-			$result = $o['msg_ok'];
+			$result = $this->o['msg_ok'];
 		}
 		else
 			// error
-			$result = $o['msg_err'];
+			$result = $this->o['msg_err'];
     }
     return $result;
 }
@@ -110,7 +158,7 @@ function tcf_send_mail()
 /**
  * shows options page
  */
-function tcf_options_page()
+function optionsPage()
 {	
 	if (!current_user_can('manage_options'))
 		wp_die(__('Sorry, but you have no permissions to change settings.'));
@@ -130,52 +178,62 @@ function tcf_options_page()
 			$msg_err = "Sorry. An error occured while sending the message!";
 		$submit = stripslashes($_POST['tcf_submit']);
 		$css = stripslashes($_POST['tcf_css']);
+		$captcha = ( isset($_POST['tcf_captcha']) ) ? 1 : 0;
 		
-		$options = array(
+		$this->o = array(
 			'to_email'		=> $to,
 			'from_email'	=> $from,
 			'css'			=> $css,
 			'msg_ok'		=> $msg_ok,
 			'msg_err'		=> $msg_err,
-			'submit'		=> $submit);
-		update_option('tiny_contact_form', $options);
+			'submit'		=> $submit,
+			'captcha'		=> $captcha,
+			'captcha_label'	=> wp_specialchars($_POST['tcf_captcha_label'])
+			);
+		update_option('tiny_contact_form', $this->o);
 	}
 		
-	$o = get_option('tiny_contact_form');
-
 	// show page
 	?>
 	<div class="wrap">
-		<h2>Tiny Contact Form</h2>
+		<h2><img src="<?php echo $this->getResource('tcf_logo.png') ?>" alt="" style="width:24px;height:24px" /> Tiny Contact Form</h2>
 		<form action="options-general.php?page=tiny-contact-form" method="post">
 	    <table class="form-table">
     	<tr>
 			<th><?php _e('TO:', 'tcf-lang')?></th>
-			<td><input name="tcf_to_email" type="text" size="30" value="<?php echo $o['to_email'] ?>" /> <?php _e('E-mail'); ?></td>
+			<td><input name="tcf_to_email" type="text" size="30" value="<?php echo $this->o['to_email'] ?>" /> <?php _e('E-mail'); ?></td>
 		</tr>
     	<tr>
 			<th><?php _e('FROM:', 'tcf-lang')?></th>
-			<td><input name="tcf_from_email" type="text" size="30" value="<?php echo $o['from_email'] ?>" /> <?php _e('E-mail'); ?> <?php _e('(optional)'); ?></td>
+			<td><input name="tcf_from_email" type="text" size="30" value="<?php echo $this->o['from_email'] ?>" /> <?php _e('E-mail'); ?> <?php _e('(optional)'); ?></td>
 		</tr>
     	<tr>
 			<th><?php _e('Message OK:', 'tcf-lang')?></th>
-			<td><input name="tcf_msg_ok" type="text" size="72" value="<?php echo $o['msg_ok'] ?>" /></td>
+			<td><input name="tcf_msg_ok" type="text" size="72" value="<?php echo $this->o['msg_ok'] ?>" /></td>
 		</tr>
     	<tr>
 			<th><?php _e('Message Error:', 'tcf-lang')?></th>
-			<td><input name="tcf_msg_err" type="text" size="72" value="<?php echo $o['msg_err'] ?>" /></td>
+			<td><input name="tcf_msg_err" type="text" size="72" value="<?php echo $this->o['msg_err'] ?>" /></td>
 		</tr>
 		<tr>
 			<th><?php _e('Submit Button:', 'tcf-lang')?></th>
-			<td><input name="tcf_submit" type="text" size="30" value="<?php echo $o['submit'] ?>" /> <?php _e('(optional)'); ?></td>
+			<td><input name="tcf_submit" type="text" size="30" value="<?php echo $this->o['submit'] ?>" /> <?php _e('(optional)'); ?></td>
+		</tr>
+    	<tr>
+			<th><?php _e('Captcha:', 'tcf-lang')?></th>
+			<td><label for="tcf_captcha"><input name="tcf_captcha" id="tcf_captcha" type="checkbox" <?php if($this->o['captcha']==1) echo 'checked="checked"' ?>" /> <?php _e('use a little mathematic spam test like " 12 + 5 = "', 'tcf-lang'); ?></label></td>
+		</tr>
+    	<tr>
+			<th><?php _e('Captcha Label:', 'tcf-lang')?></th>
+			<td><input name="tcf_captcha_label" type="text" size="72" value="<?php echo $this->o['captcha_label'] ?>" /></td>
 		</tr>
     	<tr>
 			<th>
 				<?php _e('StyleSheet:', 'tcf-lang'); ?><br />
-				<a href="javascript:tcf_reset_css();"><?php _e('reset', 'tcf-lang'); ?></a>
+				<a href="javascript:resetCss();"><?php _e('reset', 'tcf-lang'); ?></a>
 			</th>
 			<td>
-				<textarea name="tcf_css" id="tcf_css" cols="70" rows="10"><?php echo $o['css'] ?></textarea><br />
+				<textarea name="tcf_css" id="tcf_css" style="width:100%" rows="10"><?php echo $this->o['css'] ?></textarea><br />
 				<?php _e('Use this field or the <code>style.css</code> in your theme directory.', 'tcf-lang') ?>
 			</td>
 		</tr>
@@ -186,7 +244,7 @@ function tcf_options_page()
 		</form>
 		
 		<script type="text/javascript">
-		function tcf_reset_css()
+		function resetCss()
 		{
 			css = ".contactform {}\n.contactform label {}\n.contactform input {}\n.contactform textarea {}\n"
 				+ ".contactform_respons {}\n.contactform_error {}\n.widget .contactform { /* same fields but in sidebar */ }";
@@ -202,51 +260,53 @@ function tcf_options_page()
 /**
  * widget
  */
-function widget_tcf_init()
+function widgetTcfInit()
 {
 	if (! function_exists('register_sidebar_widget'))
 		return;
 	
-	function widget_tcf($args)
+	function widgetTcf($args)
 	{
+		global $tiny_contact_form;
+		
 		extract($args);
-		$options = get_option('tiny_contact_form');
-		$title = (!empty($options['widget_title'])) ? $options['widget_title'] : 'Tiny Contact Form';
+		$title = (!empty($tiny_contact_form->o['widget_title'])) ? $tiny_contact_form->o['widget_title'] : 'Tiny Contact Form';
 		echo $before_widget;
 		echo $before_title.$title.$after_title;
-		echo tcf_show_form();
+		echo $tiny_contact_form->showForm();
 		echo $after_widget;
 	}
-	register_sidebar_widget('Tiny Contact Form', 'widget_tcf');
+	register_sidebar_widget('Tiny Contact Form', 'widgetTcf');
 	
-	function widget_tcf_control()
+	function widgetTcfControl()
 	{
+		global $tiny_contact_form;
+		
 		if ( !empty($_POST['widget_tcf_title']) )
 		{
-			$options = get_option('tiny_contact_form');
-			$options['widget_title'] = stripslashes($_POST['widget_tcf_title']);
-			update_option('tiny_contact_form', $options);
+			$tiny_contact_form->o['widget_title'] = stripslashes($_POST['widget_tcf_title']);
+			update_option('tiny_contact_form', $tiny_contact_form->o);
 		}
-		$options = get_option('tiny_contact_form');
-		$title = (!empty($options['widget_title'])) ? $options['widget_title'] : 'Tiny Contact Form';
-		echo '<p style="text-align:right;"><label for="widget_tcf_title">Title: <input style="width: 200px;" id="widget_tcf_title" name="widget_tcf_title" type="text" value="'.$title.'" /></label></p>';
+		$title = (!empty($tiny_contact_form->o['widget_title'])) ? $tiny_contact_form->o['widget_title'] : 'Tiny Contact Form';
+		echo '<p><label for="widget_tcf_title">Title: <input style="width: 150px;" id="widget_tcf_title" name="widget_tcf_title" type="text" value="'.$title.'" /></label></p>';
 	}
-	register_widget_control('Tiny Contact Form', 'widget_tcf_control');
+	register_widget_control('Tiny Contact Form', 'widgetTcfControl');
 }
-
-add_action('plugins_loaded', 'widget_tcf_init');
 
 
 
 /**
  * adds admin menu
  */
-function tcf_add_options_page()
+function addOptionsPage()
 {
-	add_options_page('Tiny Contact Form', 'Tiny Contact Form', 9, 'tiny-contact-form', 'tcf_options_page');
+	global $wp_version;
+	$menutitle = '';
+	if ( version_compare( $wp_version, '2.6.999', '>' ) )
+		$menutitle = '<img src="'.$this->getResource('tcf_menu.png').'" alt="" /> ';
+	$menutitle .= 'Tiny Contact Form';
+	add_options_page('Tiny Contact Form', $menutitle, 9, 'tiny-contact-form', array( &$this, 'optionsPage'));
 }
-
-add_action('admin_menu', 'tcf_add_options_page');
 
 
 
@@ -255,12 +315,10 @@ add_action('admin_menu', 'tcf_add_options_page');
  *
  * @param string $atts parameters
  */
-function tcf_shortcode( $atts )
+function shortcode( $atts )
 {
-	return tcf_show_form();
+	return $this->showForm();
 }
-
-add_shortcode('TINY-CONTACT-FORM', 'tcf_shortcode');
 
 
 
@@ -269,20 +327,23 @@ add_shortcode('TINY-CONTACT-FORM', 'tcf_shortcode');
  * 
  * @return string message
  */
-function tcf_check_input()
+function checkInput()
 {
 	// exit if no form data
 	if ( !isset($_POST['tcf_sendit']))
 		return false;
 
-	// spam check
+	// hidden field check
 	if ( (isset($_POST['tcf_sendit']) && $_POST['tcf_sendit'] != 1)
 		|| (isset($_POST['tcf_name']) && $_POST['tcf_name'] != '') )
 	{
 		return 'No Spam please!';
 	}
-		
-    $_POST['tcf_sender'] = stripslashes(trim($_POST['tcf_sender']));
+	
+	// for captcha check
+	$o = get_option('tiny_contact_form');
+
+	$_POST['tcf_sender'] = stripslashes(trim($_POST['tcf_sender']));
     $_POST['tcf_email'] = stripslashes(trim($_POST['tcf_email']));
     $_POST['tcf_subject'] = stripslashes(trim($_POST['tcf_subject']));
     $_POST['tcf_msg'] = stripslashes(trim($_POST['tcf_msg']));
@@ -296,6 +357,8 @@ function tcf_check_input()
 		$error[] = __('Subject', 'tcf-lang');
     if ( empty($_POST['tcf_msg']) )
 		$error[] = __('Your Message', 'tcf-lang');
+	if ( $o['captcha'] && !TinyContactFormCaptcha::isCaptchaOk() )
+		$error[] = $this->o['captcha_label'];
 	if ( !empty($error) )
 		return __('Check these fields:', 'tcf-lang').' '.implode(', ', $error);
 	
@@ -305,53 +368,219 @@ function tcf_check_input()
 
 
 /**
- * adds locale support
- */
-if (defined('WPLANG') && function_exists('load_plugin_textdomain'))
-	load_plugin_textdomain('tcf-lang', '', dirname(plugin_basename(__FILE__)).'/locale');
-
-
-
-/**
  * clean up when uninstall
  */
-function tcf_uninstall()
+function uninstall()
 {
 	delete_option('tiny_contact_form');
 }
 
-// since WordPress 2.7
-if ( function_exists('register_uninstall_hook') )
-	register_uninstall_hook(__FILE__, 'tcf_uninstall'); 
-
 
 
 /**
- * adds style
+ * adds custom style to page
  */
-function tcf_add_style()
+function addStyle()
 {
-	$o = get_option('tiny_contact_form');
-	echo "<style type=\"text/css\">\n .tcf_input {display:none !important; visibilty:hidden !important}\n".$o['css']."\n</style>\n";
+	echo "\n<style type=\"text/css\">\n .tcf_input {display:none !important; visibility:hidden !important;}\n".$this->o['css']."\n</style>\n";
 }
-add_action('wp_head', 'tcf_add_style');
 
 
 
 /**
  * adds an action link to the plugins page
  */
-function tcf_plugin_actions($links, $file)
+function pluginActions($links, $file)
 {
 	if( $file == plugin_basename(__FILE__) )
 	{
-		//$link = '<a href="options-general.php?page='.dirname(plugin_basename(__FILE__)).'/tiny-contact-form.php">'.__('Settings').'</a>';
 		$link = '<a href="options-general.php?page=tiny-contact-form">'.__('Settings').'</a>';
 		array_unshift( $links, $link );
 	}
 	return $links;
 }
 
-add_filter('plugin_action_links', 'tcf_plugin_actions', 10, 2);
+
+
+/**
+ * defines base64 encoded image recources
+ */
+function setRecources()
+{
+	if ( isset($_GET['resource']) && !empty($_GET['resource']) )
+	{
+		# base64 encoding
+		$resources = array(
+			'tcf_menu.png' =>
+			'iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAX'.
+			'NSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYA'.
+			'AICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RV'.
+			'h0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjM2qefiJQAAAEtJREFU'.
+			'KFNj9GD4/58BCnYwMDI2NDTA+TBxymiQDTAMMglkAz5Mum20t4'.
+			'GQm9HlwZ4k1iNgtWRpIMVZINewEusksDrkYEWOQFyGAABXBYxc'.
+			'mDNSvQAAAABJRU5ErkJggg==',
+			'tcf_logo.png' =>
+			'iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAX'.
+			'NSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYA'.
+			'AICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABh0RV'.
+			'h0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjM2qefiJQAAAHpJREFU'.
+			'SEtj9GD4/58BC9jBwMgIEm5oaMAqj00PVjGQBdgwTDHIAkow0Q'.
+			'4ZvAppHkQ0t2Dwhi2xLqN5ENHcAmJ9OnjVUVIMEKMXXJjREsMt'.
+			'oHYYwxw9agHOkMUIIlpFNO1TEdCPrFBM7YQEN4+2FuAq7NDFyf'.
+			'YerS0AAHa/Vp9sTByIAAAAAElFTkSuQmCC');
+			 
+		if ( array_key_exists($_GET['resource'], $resources) )
+		{
+			$content = base64_decode($resources[ $_GET['resource'] ]);
+	 
+			$lastMod = filemtime(__FILE__);
+			$client = ( isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? $_SERVER['HTTP_IF_MODIFIED_SINCE'] : false );
+			if (isset($client) && (strtotime($client) == $lastMod))
+			{
+				header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastMod).' GMT', true, 304);
+				exit;
+			}
+			else
+			{
+				header('Last-Modified: '.gmdate('D, d M Y H:i:s', $lastMod).' GMT', true, 200);
+				header('Content-Length: '.strlen($content));
+				header('Content-Type: image/' . substr(strrchr($_GET['resource'], '.'), 1) );
+				echo $content;
+				exit;
+			}
+		}
+	}
+}
+
+
+
+/**
+ * gets image recource with given name
+ */
+function getResource( $resourceID ) {
+	return trailingslashit( get_bloginfo('url') ).'?resource='.$resourceID;
+}
+
+
+
+} // TCF class
+
+
+
+
+
+/**
+ * Captcha class
+ */
+class TinyContactFormCaptcha
+{
+	
+var $first;
+var $operation;
+var $second;
+var $answer;
+var $captcha_id;
+
+/**
+ * creates captcha
+ * @param String $seed ID
+ */
+function TinyContactFormCaptcha( $seed )
+{
+	$this->captcha_id = $seed;
+	if ( $seed )
+		srand($seed);
+	$operation = rand(1, 4);
+	switch ( $operation )
+	{
+		case 1:
+			$this->operation = '+';
+			$this->first = rand(1, 20);
+			$this->second = rand(0, 20);
+			$this->answer = $this->first + $this->second;
+			break;
+		case 2:
+			$this->operation = '-';
+			$this->first = rand(1, 20);
+			$this->second = rand(0, ($this->first - 1));
+			$this->answer = $this->first - $this->second;
+			break;
+		case 3:
+			$this->operation = 'x';
+			$this->first = rand(1, 10);
+			$this->second = rand(1, 10);
+			$this->answer = $this->first * $this->second;
+			break;
+		case 4:
+			$this->operation = '/';
+			$this->first = rand(1, 20);
+			do
+			{
+				$this->second = rand(1, 20);
+			}
+			while (($this->first % $this->second) != 0);
+			$this->answer = $this->first / $this->second;
+			break;
+	}
+}
+
+
+
+/**
+ * returns answer
+ */
+function getAnswer()
+{
+	return $this->answer;
+}
+
+
+
+/**
+ * returns question
+ */
+function getQuestion()
+{
+	return $this->first.' '.$this->operation.' '.$this->second.' = ';
+}
+
+
+
+/**
+ * checks answer
+ */
+static function isCaptchaOk()
+{
+	$ok = true;
+	// time and ID in form?
+	if ($_POST[base64_encode(strrev('current_time'))] && $_POST[base64_encode(strrev('captcha'))])
+	{
+		// maximum 30 minutes to fill the form
+		if ((mktime() - strrev(base64_decode($_POST[base64_encode(strrev('current_time'))]))) > 1800)
+			$ok = false;
+		// check answer
+		$valid = new TinyContactFormCaptcha(strrev(base64_decode($_POST[base64_encode(strrev('captcha'))])));
+		if ($_POST[base64_encode(strrev('answer'))] != $valid->getAnswer())
+			$ok = false;
+	}
+	return $ok;
+}
+
+	
+	
+/**
+ * creates input fields in form
+ */
+function getCaptcha()
+{
+	global $tiny_contact_form;
+	return '<input name="'.base64_encode(strrev('current_time')).'" type="hidden" value="'.base64_encode(strrev(mktime())).'" />'."\n"
+		.'<input name="'.base64_encode(strrev('captcha')).'" type="hidden" value="'.base64_encode(strrev($this->captcha_id)).'" />'."\n"
+		.'<label for="tcf_captcha">'.$tiny_contact_form->o['captcha_label'].' <b>'.$this->getQuestion().'</b></label><input id="tcf_captcha" name="'.base64_encode(strrev('answer')).'" type="text" />'."\n";
+}
+
+} // captcha class
+
+
 
 ?>
