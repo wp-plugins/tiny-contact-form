@@ -59,9 +59,7 @@ function TinyContactForm()
 function showForm()
 {
 	$result = $this->sendMail();
-	
 	$captcha = new TinyContactFormCaptcha( rand(1000000000, 9999999999) );
-	
 	$title = (!empty($this->o['submit'])) ? 'value="'.$this->o['submit'].'"' : '';
 	
 	if ( $result == $this->o['msg_ok'] )
@@ -72,8 +70,6 @@ function showForm()
 		if ( !empty($result) )
 			// error message
 			$result = '<p class="contactform_error">'.$result.'</p>';
-		
-//			'.get_permalink().'
 		$form = '
 			<div class="contactform" id="tcform">
 			'.$result.'
@@ -549,7 +545,7 @@ function getQuestion()
 /**
  * checks answer
  */
-static function isCaptchaOk()
+function isCaptchaOk()
 {
 	$ok = true;
 	// time and ID in form?
