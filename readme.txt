@@ -4,7 +4,7 @@ Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.7
 Tested up to: 2.8
-Stable tag: 0.5.2
+Stable tag: 0.5.1
 
 Little form that allows site visitors to contact you by email.
 
@@ -56,13 +56,10 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 
 == Changelog ==
 
-0.5.2
-+ Bugfix: referer on pages with more post was wrong
-
 0.5.1
++ Bugfix: referer on pages with more post was wrong
 + Bugfix: PHP4 compatibility, "static" before function deleted
 + new translation: Danish, thanks to Jonas Thomsen
-+ new translation: 
 
 0.5
 + new: optional captcha
