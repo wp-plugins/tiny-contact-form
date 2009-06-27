@@ -5,7 +5,7 @@ Plugin URI: http://www.tomsdimension.de/wp-plugins/tiny-contact-form
 Description: Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page.
 Author: Tom Braider
 Author URI: http://www.tomsdimension.de
-Version: 0.5
+Version: 0.5.1
 
 Silent Helper: Jay Shergill http://www.pdrater.com
 */
@@ -132,7 +132,7 @@ function sendMail()
 		'Email..: '.$email."\r\n\r\n".
 		'Subject: '.$_POST['tcf_subject']."\r\n\r\n".
 		wordwrap($msg, 76, "\r\n")."\r\n\r\n".
-		'Referer: '.get_permalink()."\r\n".
+		'Referer: '.$_SERVER['HTTP_REFERER']."\r\n".
 		'Browser: '.$_SERVER['HTTP_USER_AGENT']."\r\n";
 		
     	// send mail
