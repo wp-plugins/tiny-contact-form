@@ -201,7 +201,7 @@ function optionsPage()
 		</tr>
     	<tr>
 			<th><?php _e('FROM:', 'tcf-lang')?></th>
-			<td><input name="tcf_from_email" type="text" size="30" value="<?php echo $this->o['from_email'] ?>" /> <?php _e('E-mail'); ?> <?php _e('(optional)'); ?></td>
+			<td><input name="tcf_from_email" type="text" size="30" value="<?php echo $this->o['from_email'] ?>" /> <?php _e('E-mail'); ?> <?php _e('(optional)', 'tcf-lang'); ?></td>
 		</tr>
     	<tr>
 			<th><?php _e('Message OK:', 'tcf-lang')?></th>
@@ -213,7 +213,7 @@ function optionsPage()
 		</tr>
 		<tr>
 			<th><?php _e('Submit Button:', 'tcf-lang')?></th>
-			<td><input name="tcf_submit" type="text" size="30" value="<?php echo $this->o['submit'] ?>" /> <?php _e('(optional)'); ?></td>
+			<td><input name="tcf_submit" type="text" size="30" value="<?php echo $this->o['submit'] ?>" /> <?php _e('(optional)', 'tcf-lang'); ?></td>
 		</tr>
     	<tr>
 			<th><?php _e('Captcha:', 'tcf-lang')?></th>

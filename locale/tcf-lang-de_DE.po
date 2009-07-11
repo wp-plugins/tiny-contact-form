@@ -17,93 +17,93 @@ msgstr ""
 ": \n"
 "X-Poedit-SearchPath-0: ."
 
-#: tiny-contact-form.php:84
-#: tiny-contact-form.php:352
+#: tiny-contact-form.php:80
+#: tiny-contact-form.php:349
 msgid "Name"
 msgstr "Name"
 
-#: tiny-contact-form.php:86
-#: tiny-contact-form.php:354
+#: tiny-contact-form.php:82
+#: tiny-contact-form.php:351
 msgid "Email"
 msgstr "Email"
 
-#: tiny-contact-form.php:88
-#: tiny-contact-form.php:356
+#: tiny-contact-form.php:84
+#: tiny-contact-form.php:353
 msgid "Subject"
 msgstr "Betreff"
 
-#: tiny-contact-form.php:90
-#: tiny-contact-form.php:358
+#: tiny-contact-form.php:86
+#: tiny-contact-form.php:355
 msgid "Your Message"
 msgstr "Deine Nachricht"
 
-#: tiny-contact-form.php:163
+#: tiny-contact-form.php:160
 msgid "Sorry, but you have no permissions to change settings."
 msgstr "Du hast keine Berechtigungen diese Einstellungen zu ändern."
 
-#: tiny-contact-form.php:202
+#: tiny-contact-form.php:199
 msgid "TO:"
 msgstr "Empfänger:"
 
-#: tiny-contact-form.php:203
-#: tiny-contact-form.php:207
+#: tiny-contact-form.php:200
+#: tiny-contact-form.php:204
 msgid "E-mail"
 msgstr "E-mail"
 
-#: tiny-contact-form.php:206
+#: tiny-contact-form.php:203
 msgid "FROM:"
 msgstr "Absender:"
 
-#: tiny-contact-form.php:207
-#: tiny-contact-form.php:219
+#: tiny-contact-form.php:204
+#: tiny-contact-form.php:216
 msgid "(optional)"
 msgstr "(optional)"
 
-#: tiny-contact-form.php:210
+#: tiny-contact-form.php:207
 msgid "Message OK:"
 msgstr "Erfolgsmeldung:"
 
-#: tiny-contact-form.php:214
+#: tiny-contact-form.php:211
 msgid "Message Error:"
 msgstr "Fehlermeldung:"
 
-#: tiny-contact-form.php:231
+#: tiny-contact-form.php:228
 msgid "StyleSheet:"
 msgstr "StyleSheet:"
 
-#: tiny-contact-form.php:241
+#: tiny-contact-form.php:238
 msgid "Save Changes"
 msgstr "Einstellungen speichern"
 
-#: tiny-contact-form.php:362
+#: tiny-contact-form.php:359
 msgid "Check these fields:"
 msgstr "Überprüfe die Felder:"
 
-#: tiny-contact-form.php:232
+#: tiny-contact-form.php:229
 msgid "reset"
 msgstr "zurücksetzen"
 
-#: tiny-contact-form.php:236
+#: tiny-contact-form.php:233
 msgid "Use this field or the <code>style.css</code> in your theme directory."
 msgstr "Benutze dieses Feld oder die <code>style.css</code> in deinem Theme-Verzeichnis."
 
-#: tiny-contact-form.php:218
+#: tiny-contact-form.php:215
 msgid "Submit Button:"
 msgstr "Senden Button:"
 
-#: tiny-contact-form.php:222
+#: tiny-contact-form.php:219
 msgid "Captcha:"
 msgstr "Captcha:"
 
-#: tiny-contact-form.php:226
+#: tiny-contact-form.php:223
 msgid "Captcha Label:"
 msgstr "Captcha Label:"
 
-#: tiny-contact-form.php:396
+#: tiny-contact-form.php:393
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: tiny-contact-form.php:223
+#: tiny-contact-form.php:220
 msgid "use a little mathematic spam test like \" 12 + 5 = \""
 msgstr "kleinen Mathetest als Spamschutz z.B. \" 12 + 5 = \""
 
