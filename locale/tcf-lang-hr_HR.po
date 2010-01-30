@@ -13,90 +13,116 @@ msgstr ""
 "X-Poedit-Language: Hrvatski\n"
 "X-Poedit-Country: Hrvatski\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
-": \n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
+"X-Textdomain-Support: yes"
 
-#: ../tiny-contact-form.php:43
-#: ../tiny-contact-form.php:273
+#: tiny-contact-form.php:80
+#: tiny-contact-form.php:349
+#@ tcf-lang
 msgid "Name"
 msgstr "Ime"
 
-#: ../tiny-contact-form.php:45
-#: ../tiny-contact-form.php:275
+#: tiny-contact-form.php:82
+#: tiny-contact-form.php:351
+#@ tcf-lang
 msgid "Email"
 msgstr "Email"
 
-#: ../tiny-contact-form.php:47
-#: ../tiny-contact-form.php:277
+#: tiny-contact-form.php:84
+#: tiny-contact-form.php:353
+#@ tcf-lang
 msgid "Subject"
 msgstr "Naslov"
 
-#: ../tiny-contact-form.php:49
-#: ../tiny-contact-form.php:279
+#: tiny-contact-form.php:86
+#: tiny-contact-form.php:355
+#@ tcf-lang
 msgid "Your Message"
 msgstr "Vaša poruka"
 
-#: ../tiny-contact-form.php:51
-msgid "Submit"
-msgstr "Pošalji"
-
-#: ../tiny-contact-form.php:119
+#: tiny-contact-form.php:160
 msgid "Sorry, but you have no permissions to change settings."
 msgstr "Žalimo, ali nemate dozvole za mijenjanje postavki."
 
-#: ../tiny-contact-form.php:130
-msgid "Thank you! Your message was sent successfully."
-msgstr "Hvala ! Vaša poruka je uspješno poslana."
-
-#: ../tiny-contact-form.php:133
-msgid "Sorry. An error occured while sending the message!"
-msgstr "Žalimo, ali nastala je greška prilikom slanja poruke !"
-
-#: ../tiny-contact-form.php:154
+#: tiny-contact-form.php:199
+#@ tcf-lang
 msgid "TO:"
 msgstr "Primatelj:"
 
-#: ../tiny-contact-form.php:155
-#: ../tiny-contact-form.php:159
+#: tiny-contact-form.php:200
+#: tiny-contact-form.php:204
 msgid "E-mail"
 msgstr "E-mail"
 
-#: ../tiny-contact-form.php:158
+#: tiny-contact-form.php:203
+#@ tcf-lang
 msgid "FROM:"
 msgstr "Pošiljatelj:"
 
-#: ../tiny-contact-form.php:159
+#: tiny-contact-form.php:204
+#: tiny-contact-form.php:216
+#@ tcf-lang
 msgid "(optional)"
 msgstr "(opcionalno)"
 
-#: ../tiny-contact-form.php:162
+#: tiny-contact-form.php:207
+#@ tcf-lang
 msgid "Message OK:"
 msgstr "Poruka OK:"
 
-#: ../tiny-contact-form.php:166
+#: tiny-contact-form.php:211
+#@ tcf-lang
 msgid "Message Error:"
 msgstr "Poruka za grešku:"
 
-#: ../tiny-contact-form.php:171
+#: tiny-contact-form.php:228
+#@ tcf-lang
 msgid "StyleSheet:"
 msgstr "StyleSheet:"
 
-#: ../tiny-contact-form.php:172
+#: tiny-contact-form.php:229
+#@ tcf-lang
 msgid "reset"
 msgstr "resetiraj"
 
-#: ../tiny-contact-form.php:176
+#: tiny-contact-form.php:233
+#@ tcf-lang
 msgid "Use this field or the <code>style.css</code> in your theme directory."
 msgstr "Koristi ovo polje ili <code>style.css</code> u tvom direktoriju teme."
 
-#: ../tiny-contact-form.php:181
+#: tiny-contact-form.php:238
 msgid "Save Changes"
 msgstr "Spremi promjene"
 
-#: ../tiny-contact-form.php:281
+#: tiny-contact-form.php:359
+#@ tcf-lang
 msgid "Check these fields:"
 msgstr "Provjeri ova polja:"
+
+#: tiny-contact-form.php:215
+#@ tcf-lang
+msgid "Submit Button:"
+msgstr ""
+
+#: tiny-contact-form.php:219
+#@ tcf-lang
+msgid "Captcha:"
+msgstr ""
+
+#: tiny-contact-form.php:220
+#@ tcf-lang
+msgid "use a little mathematic spam test like \" 12 + 5 = \""
+msgstr ""
+
+#: tiny-contact-form.php:223
+#@ tcf-lang
+msgid "Captcha Label:"
+msgstr ""
+
+#: tiny-contact-form.php:393
+msgid "Settings"
+msgstr ""
 
