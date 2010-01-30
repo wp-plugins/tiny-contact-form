@@ -13,27 +13,33 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
-": \n"
-"X-Poedit-SearchPath-0: ."
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
 
 #: tiny-contact-form.php:80
 #: tiny-contact-form.php:349
+#@ tcf-lang
 msgid "Name"
 msgstr "Name"
 
 #: tiny-contact-form.php:82
 #: tiny-contact-form.php:351
+#@ tcf-lang
 msgid "Email"
 msgstr "Email"
 
 #: tiny-contact-form.php:84
 #: tiny-contact-form.php:353
+#@ tcf-lang
 msgid "Subject"
 msgstr "Betreff"
 
 #: tiny-contact-form.php:86
 #: tiny-contact-form.php:355
+#@ tcf-lang
 msgid "Your Message"
 msgstr "Deine Nachricht"
 
@@ -42,6 +48,7 @@ msgid "Sorry, but you have no permissions to change settings."
 msgstr "Du hast keine Berechtigungen diese Einstellungen zu ändern."
 
 #: tiny-contact-form.php:199
+#@ tcf-lang
 msgid "TO:"
 msgstr "Empfänger:"
 
@@ -51,23 +58,28 @@ msgid "E-mail"
 msgstr "E-mail"
 
 #: tiny-contact-form.php:203
+#@ tcf-lang
 msgid "FROM:"
 msgstr "Absender:"
 
 #: tiny-contact-form.php:204
 #: tiny-contact-form.php:216
+#@ tcf-lang
 msgid "(optional)"
 msgstr "(optional)"
 
 #: tiny-contact-form.php:207
+#@ tcf-lang
 msgid "Message OK:"
 msgstr "Erfolgsmeldung:"
 
 #: tiny-contact-form.php:211
+#@ tcf-lang
 msgid "Message Error:"
 msgstr "Fehlermeldung:"
 
 #: tiny-contact-form.php:228
+#@ tcf-lang
 msgid "StyleSheet:"
 msgstr "StyleSheet:"
 
@@ -76,26 +88,32 @@ msgid "Save Changes"
 msgstr "Einstellungen speichern"
 
 #: tiny-contact-form.php:359
+#@ tcf-lang
 msgid "Check these fields:"
 msgstr "Überprüfe die Felder:"
 
 #: tiny-contact-form.php:229
+#@ tcf-lang
 msgid "reset"
 msgstr "zurücksetzen"
 
 #: tiny-contact-form.php:233
+#@ tcf-lang
 msgid "Use this field or the <code>style.css</code> in your theme directory."
 msgstr "Benutze dieses Feld oder die <code>style.css</code> in deinem Theme-Verzeichnis."
 
 #: tiny-contact-form.php:215
+#@ tcf-lang
 msgid "Submit Button:"
 msgstr "Senden Button:"
 
 #: tiny-contact-form.php:219
+#@ tcf-lang
 msgid "Captcha:"
 msgstr "Captcha:"
 
 #: tiny-contact-form.php:223
+#@ tcf-lang
 msgid "Captcha Label:"
 msgstr "Captcha Label:"
 
@@ -104,6 +122,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: tiny-contact-form.php:220
+#@ tcf-lang
 msgid "use a little mathematic spam test like \" 12 + 5 = \""
 msgstr "kleinen Mathetest als Spamschutz z.B. \" 12 + 5 = \""
 

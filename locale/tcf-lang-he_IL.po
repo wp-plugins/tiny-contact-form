@@ -2,19 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny Contact Form v0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-13 23:10+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Jonas Thomsen <mail@jonasthomsen.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2009-06-12 20:29+0100\n"
+"PO-Revision-Date: 2009-09-05 01:57+0200\n"
+"Last-Translator: \n"
+"Language-Team: www.tgspot.co.il <www.tgspot.co.il>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Poedit-Language: Danish\n"
-"X-Poedit-Country: DENMARK\n"
+"X-Poedit-Language: Hebrew\n"
+"X-Poedit-Country: ISRAEL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
-"X-Poedit-Basepath: \n"
+"X-Poedit-Basepath: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
@@ -23,7 +23,7 @@ msgstr ""
 #: tiny-contact-form.php:349
 #@ tcf-lang
 msgid "Name"
-msgstr "Navn"
+msgstr "שם"
 
 #: tiny-contact-form.php:82
 #: tiny-contact-form.php:351
@@ -35,22 +35,22 @@ msgstr "Email"
 #: tiny-contact-form.php:353
 #@ tcf-lang
 msgid "Subject"
-msgstr "Emne"
+msgstr "נושא"
 
 #: tiny-contact-form.php:86
 #: tiny-contact-form.php:355
 #@ tcf-lang
 msgid "Your Message"
-msgstr "Din Besked"
+msgstr "תוכן ההודעה"
 
 #: tiny-contact-form.php:160
 msgid "Sorry, but you have no permissions to change settings."
-msgstr "Du har ikke rettigheder til at ændre indstillinger."
+msgstr "אין לך הרשאות לשנות הגדרות"
 
 #: tiny-contact-form.php:199
 #@ tcf-lang
 msgid "TO:"
-msgstr "Modtager:"
+msgstr "אל:"
 
 #: tiny-contact-form.php:200
 #: tiny-contact-form.php:204
@@ -60,69 +60,69 @@ msgstr "E-mail"
 #: tiny-contact-form.php:203
 #@ tcf-lang
 msgid "FROM:"
-msgstr "Afsender:"
+msgstr "מאת:"
 
 #: tiny-contact-form.php:204
 #: tiny-contact-form.php:216
 #@ tcf-lang
 msgid "(optional)"
-msgstr "(valgfrit)"
+msgstr "(לא חובה)"
 
 #: tiny-contact-form.php:207
 #@ tcf-lang
 msgid "Message OK:"
-msgstr "Succes meddelse:"
+msgstr "ההודעה תקינה:"
 
 #: tiny-contact-form.php:211
 #@ tcf-lang
 msgid "Message Error:"
-msgstr "Fejl medddelse:"
+msgstr "בעיה עם ההודעה:"
 
 #: tiny-contact-form.php:228
 #@ tcf-lang
 msgid "StyleSheet:"
 msgstr "StyleSheet:"
 
-#: tiny-contact-form.php:238
-msgid "Save Changes"
-msgstr "Gem indstillinger"
-
-#: tiny-contact-form.php:359
-#@ tcf-lang
-msgid "Check these fields:"
-msgstr "Tjek disse felter:"
-
 #: tiny-contact-form.php:229
 #@ tcf-lang
 msgid "reset"
-msgstr "nulstil"
+msgstr "אפס"
 
 #: tiny-contact-form.php:233
 #@ tcf-lang
 msgid "Use this field or the <code>style.css</code> in your theme directory."
-msgstr "Benyt dette felt eller <code>style.css</code> i din tema mappe"
+msgstr "השתמש בשדה זה <code>style.css</code> בתיקיית העיצוב שלך."
+
+#: tiny-contact-form.php:238
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+#: tiny-contact-form.php:359
+#@ tcf-lang
+msgid "Check these fields:"
+msgstr "בדוק שדות אלה:"
 
 #: tiny-contact-form.php:215
 #@ tcf-lang
 msgid "Submit Button:"
-msgstr "Send knap:"
+msgstr ""
 
 #: tiny-contact-form.php:219
 #@ tcf-lang
 msgid "Captcha:"
-msgstr "Captcha:"
-
-#: tiny-contact-form.php:223
-#@ tcf-lang
-msgid "Captcha Label:"
-msgstr "Captcha Label:"
-
-#: tiny-contact-form.php:393
-msgid "Settings"
-msgstr "Indstillinger"
+msgstr ""
 
 #: tiny-contact-form.php:220
 #@ tcf-lang
 msgid "use a little mathematic spam test like \" 12 + 5 = \""
-msgstr "Brug en lille matematisk spam test fx: \" 12 + 5 = \""
+msgstr ""
+
+#: tiny-contact-form.php:223
+#@ tcf-lang
+msgid "Captcha Label:"
+msgstr ""
+
+#: tiny-contact-form.php:393
+msgid "Settings"
+msgstr ""
 
