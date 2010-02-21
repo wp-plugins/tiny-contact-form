@@ -5,9 +5,7 @@ Plugin URI: http://www.tomsdimension.de/wp-plugins/tiny-contact-form
 Description: Little form that allows site visitors to contact you. Use [TINY-CONTACT-FORM] within any post or page.
 Author: Tom Braider
 Author URI: http://www.tomsdimension.de
-Version: 0.5.1
-
-Silent Helper: Jay Shergill http://www.pdrater.com
+Version: 0.6
 */
 
 
@@ -19,6 +17,7 @@ class TinyContactForm
 
 var $o; // options
 var $captcha;
+var $userdata;
 
 
 /**
@@ -70,6 +69,11 @@ function showForm()
 		if ( !empty($result) )
 			// error message
 			$result = '<p class="contactform_error">'.$result.'</p>';
+			
+		// use subject from shortcode
+		if ( empty($_POST['tcf_subject']) && !empty($this->userdata['subject']) )
+			$_POST['tcf_subject'] = $this->userdata['subject'];
+			
 		$form = '
 			<div class="contactform" id="tcform">
 			'.$result.'
@@ -112,24 +116,31 @@ function sendMail()
     {
     	$result = '';
     	
-		$to		= $this->o['to_email'];
+    	// use "to" from shortcode
+		if ( !empty($this->userdata['to']) )
+			$to = $this->userdata['to'];
+		else
+			$to = $this->o['to_email'];
+		
 		$from	= $this->o['from_email'];
 	
 		$name	= $_POST['tcf_sender'];
 		$email	= $_POST['tcf_email'];
 		$subject= $_POST['tcf_subject'].' - '.get_bloginfo('name').' - Tiny Contact Form';
 		$msg	= $_POST['tcf_msg'];
-
+		
 		$headers =
 		"MIME-Version: 1.0\r\n".
 		"Reply-To: \"$name\" <$email>\r\n".
 		"Content-Type: text/plain; charset=\"".get_settings('blog_charset')."\"\r\n";
 		if ( !empty($from) )
-			$headers .= "From: $name - ".get_bloginfo('name')." <$from>\r\n";
+			$headers .= "From: ".get_bloginfo('name')." - $name <$from>\r\n";
+		else if ( !empty($email) )
+			$headers .= "From: ".get_bloginfo('name')." - $name <$email>\r\n";
 
 		$fullmsg =
-		'Name...: '.$name."\r\n".
-		'Email..: '.$email."\r\n\r\n".
+		"Name...: $name\r\n".
+		"Email..: $email\r\n\r\n".
 		'Subject: '.$_POST['tcf_subject']."\r\n\r\n".
 		wordwrap($msg, 76, "\r\n")."\r\n\r\n".
 		'Referer: '.$_SERVER['HTTP_REFERER']."\r\n".
@@ -313,6 +324,16 @@ function addOptionsPage()
  */
 function shortcode( $atts )
 {
+	// e.g. [TINY-CONTENT-FORM to="abc@xyz.com" subject="xyz"]
+	
+	extract( shortcode_atts( array(
+		'to' => '',
+		'subject' => ''
+	), $atts) );
+	$this->userdata = array(
+		'to' => $to,
+		'subject' => $subject
+	);
 	return $this->showForm();
 }
 

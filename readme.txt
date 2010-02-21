@@ -3,8 +3,8 @@ Contributors: Tom Braider
 Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
 Requires at least: 2.7
-Tested up to: 2.8
-Stable tag: 0.5.1
+Tested up to: 2.9.2
+Stable tag: 0.6
 
 Little form that allows site visitors to contact you by email.
 
@@ -51,49 +51,57 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * de: myself ;)
 * es: Jeffrey Borb&oacute;n http://www.eljeffto.com 
 * fr: Jef Blog
+* he: Sahar Ben-Attar http://openit.co.il
 * hr, it: Alen &Scaron;irola http://www.gloriatours.hr
 * hu: MaXX http://www.novamaxx.hu
 
 == Changelog ==
 
-0.5.1
+= 0.6 =
++ new: set reciever and subject in shortcode [TINY-CONTACT-FORM to="abc@def.hi" suject="Hello"]
++ now name and email of the writer are the default "From" data if non "From" given on options page
+
+= 0.5.2 =
++ new translation: hebrew, thanks Sahar Ben-Attar
+
+= 0.5.1 =
 + Bugfix: referer on pages with more post was wrong
 + Bugfix: PHP4 compatibility, "static" before function deleted
 + new translation: Danish, thanks to Jonas Thomsen
 
-0.5
+= 0.5 =
 + new: optional captcha
 + new: referer (page the mail was sent) in mail
 + new translation: France, thanks to Jef Blog
 
-0.4.3
+= 0.4.3 =
 + Bugfix: little change in stylesheet to realy hide the "hidden" fields
 
-0.4.2
+= 0.4.2 =
 + Bugfix: little change in spam check
 
-0.4.1
+= 0.4.1 =
 + new translation: Belorussian, thanks to Marcis Gasuns
 
-0.4
+= 0.4 =
 + new: custom widget title and submit button
 
-0.3.3
+= 0.3.3 =
 + new translation: hungarian, thanks MaXX
 
-0.3.2
+= 0.3.2 =
 + new translation: espanol, thanks Jeffrey
 
-0.3.1
+= 0.3.1 =
 + new translations: hr and italiano, thanks Alen
 
-0.3
+= 0.3 =
 + new: more user settings
 + new: language support (english, german)
 + change to wp_mail()
 
-0.2
+= 0.2 =
 + new: sidebar widget to easy add the form to the sidebar
 
-0.1
+= 0.1 =
 + first release
