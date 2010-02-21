@@ -13,98 +13,116 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;__ngettext_noop:1,2;_c\n"
-": \n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
 
-#: tiny-contact-form.php:84
-#: tiny-contact-form.php:352
+#: tiny-contact-form.php:80
+#: tiny-contact-form.php:349
+#@ tcf-lang
 msgid "Name"
 msgstr "Név"
 
-#: tiny-contact-form.php:86
-#: tiny-contact-form.php:354
+#: tiny-contact-form.php:82
+#: tiny-contact-form.php:351
+#@ tcf-lang
 msgid "Email"
 msgstr "E-mail"
 
-#: tiny-contact-form.php:88
-#: tiny-contact-form.php:356
+#: tiny-contact-form.php:84
+#: tiny-contact-form.php:353
+#@ tcf-lang
 msgid "Subject"
 msgstr "Tárgy"
 
-#: tiny-contact-form.php:90
-#: tiny-contact-form.php:358
+#: tiny-contact-form.php:86
+#: tiny-contact-form.php:355
+#@ tcf-lang
 msgid "Your Message"
 msgstr "Üzenet"
 
-#: tiny-contact-form.php:163
+#: tiny-contact-form.php:160
 msgid "Sorry, but you have no permissions to change settings."
 msgstr "Sajnos nincs jogosultságod a beállítások módosításához."
 
-#: tiny-contact-form.php:202
+#: tiny-contact-form.php:199
+#@ tcf-lang
 msgid "TO:"
 msgstr "Címzett:"
 
-#: tiny-contact-form.php:203
-#: tiny-contact-form.php:207
+#: tiny-contact-form.php:200
+#: tiny-contact-form.php:204
 msgid "E-mail"
 msgstr "E-mail"
 
-#: tiny-contact-form.php:206
+#: tiny-contact-form.php:203
+#@ tcf-lang
 msgid "FROM:"
 msgstr "Küldő:"
 
-#: tiny-contact-form.php:207
-#: tiny-contact-form.php:219
+#: tiny-contact-form.php:204
+#: tiny-contact-form.php:216
+#@ tcf-lang
 msgid "(optional)"
 msgstr "(választható)"
 
-#: tiny-contact-form.php:210
+#: tiny-contact-form.php:207
+#@ tcf-lang
 msgid "Message OK:"
 msgstr "Ha az üzenet rendben:"
 
-#: tiny-contact-form.php:214
+#: tiny-contact-form.php:211
+#@ tcf-lang
 msgid "Message Error:"
 msgstr "Ha az üzenet hibás:"
 
-#: tiny-contact-form.php:231
+#: tiny-contact-form.php:228
+#@ tcf-lang
 msgid "StyleSheet:"
 msgstr "Stíluslap:"
 
-#: tiny-contact-form.php:241
+#: tiny-contact-form.php:238
 msgid "Save Changes"
 msgstr "Változások mentése"
 
-#: tiny-contact-form.php:362
+#: tiny-contact-form.php:359
+#@ tcf-lang
 msgid "Check these fields:"
 msgstr "A következő mezők nincsenek kitöltve:"
 
-#: tiny-contact-form.php:232
+#: tiny-contact-form.php:229
+#@ tcf-lang
 msgid "reset"
 msgstr "alaphelyzet"
 
-#: tiny-contact-form.php:236
+#: tiny-contact-form.php:233
+#@ tcf-lang
 msgid "Use this field or the <code>style.css</code> in your theme directory."
 msgstr "használd ezt a mezőt, vagy a <code>style.css</code>-t a témád könyvtárában."
 
-#: tiny-contact-form.php:218
+#: tiny-contact-form.php:215
+#@ tcf-lang
 msgid "Submit Button:"
 msgstr "Küldés gomb:"
 
-#: tiny-contact-form.php:222
+#: tiny-contact-form.php:219
+#@ tcf-lang
 msgid "Captcha:"
 msgstr "Captcha:"
 
-#: tiny-contact-form.php:226
+#: tiny-contact-form.php:223
+#@ tcf-lang
 msgid "Captcha Label:"
 msgstr "Captcha címke:"
 
-#: tiny-contact-form.php:396
+#: tiny-contact-form.php:393
 msgid "Settings"
 msgstr "Beállítások"
 
-#: tiny-contact-form.php:223
+#: tiny-contact-form.php:220
+#@ tcf-lang
 msgid "use a little mathematic spam test like \" 12 + 5 = \""
 msgstr "kis matek használata a spam-botok ellen, pl.: \" 12 + 5 = \""
 
