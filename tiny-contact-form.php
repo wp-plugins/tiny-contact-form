@@ -70,10 +70,13 @@ function showForm()
 			// error message
 			$result = '<p class="contactform_error">'.$result.'</p>';
 			
-		// use subject from shortcode
-		if ( empty($_POST['tcf_subject']) && !empty($this->userdata['subject']) )
+		// use subject from URL
+		if ( empty($_POST['tcf_subject']) && !empty($_GET['subject']) )
+			$_POST['tcf_subject'] = $_GET['subject'];
+		// or from shortcode
+		else if ( empty($_POST['tcf_subject']) && !empty($this->userdata['subject']) )
 			$_POST['tcf_subject'] = $this->userdata['subject'];
-			
+				
 		$form = '
 			<div class="contactform" id="tcform">
 			'.$result.'

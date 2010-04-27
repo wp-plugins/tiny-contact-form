@@ -54,11 +54,15 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 * he: Sahar Ben-Attar http://openit.co.il
 * hr, it: Alen &Scaron;irola http://www.gloriatours.hr
 * hu: MaXX http://www.novamaxx.hu
+* sv: Thomas http://www.ajfix.se
 
 == Changelog ==
 
+new language Swedish, thanks to Thomas http://www.ajfix.se
+
 = 0.6 =
 + new: set reciever and subject in shortcode [TINY-CONTACT-FORM to="abc@def.hi" suject="Hello"]
++ new: get subject from url like '?subject=Hello'
 + now name and email of the writer are the default "From" data if non "From" given on options page
 
 = 0.5.2 =
