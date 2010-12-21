@@ -62,11 +62,6 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 + new language: Swedish, thanks to Thomas http://www.ajfix.se
 + some bugfixes
 
-.tcf_label
-.tcf_field
-.tcf_textarea
-.tcf_submit
-
 = 0.6 =
 + new: set reciever and subject in shortcode [TINY-CONTACT-FORM to="abc@def.hi" suject="Hello"]
 + new: get subject from url like '?subject=Hello'
