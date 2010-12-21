@@ -1,10 +1,10 @@
 === Tiny Contact Form ===
 Contributors: Tom Braider
-Donate link: http://www.unicef.org
 Tags: email, mail, contact, form
-Requires at least: 2.7
-Tested up to: 2.9.2
-Stable tag: 0.6
+Donate link: http://www.tomsdimension.de/postcards
+Requires at least: 2.8
+Tested up to: 3.0.3
+Stable tag: 0.7
 
 Little form that allows site visitors to contact you by email.
 
@@ -17,15 +17,15 @@ Add the widget to your sidebar.
 
 1. unzip plugin directory into the '/wp-content/plugins/' directory
 1. activate the plugin through the 'Plugins' menu in WordPress
-1. insert '[TINY-CONTACT-FORM]' in your page or/and add the widget to your sidebar
 1. check the settings (email, messages, style) in backend
+1. insert '[TINY-CONTACT-FORM]' in your page or/and add the widget to your sidebar
 1. without widgets use this code to insert the form in your sidebar.
-   '&lt;?php if (isset($tiny _ contact _ form)) $tiny _ contact _ form->showForm(); ?&gt;'
+   '&lt;?php if (isset($tiny_contact_form)) echo $tiny_contact_form->showForm(); ?&gt;'
 
 == Frequently Asked Questions ==
 
 = How to style? =
-- The complete form is surrounded by a '<div class="contactform">'. Tags in FORM: LABEL, INPUT and TEXTAREA.
+- The complete form is surrounded by a 'div class="contactform"'. Tags in FORM: LABEL, INPUT and TEXTAREA.
 - To change the form style in your sidebar you can use '.widget .contactform' (plus tags above) in your template 'style.css'.
 - Since v0.3 you can use the settings.
 
@@ -39,10 +39,6 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 3. settings page
 
 == Arbitrary section ==
-
-**Silent Helper**
-
-* Jay Shergill http://www.pdrater.com
 
 **Translations**
 
@@ -58,7 +54,13 @@ read and write comments on <a href="http://www.tomsdimension.de/wp-plugins/tiny-
 
 == Changelog ==
 
-new language Swedish, thanks to Thomas http://www.ajfix.se
+= 0.7 =
++ new: multi widgets with different receivers
++ new: 5 additional fields (e.g. website, phone) possible
++ new: to hide form after submit is your choice now
++ new: alternative "question answer captcha"
++ new language: Swedish, thanks to Thomas http://www.ajfix.se
++ some bugfixes
 
 = 0.6 =
 + new: set reciever and subject in shortcode [TINY-CONTACT-FORM to="abc@def.hi" suject="Hello"]
