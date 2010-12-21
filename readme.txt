@@ -4,7 +4,7 @@ Tags: email, mail, contact, form
 Donate link: http://www.tomsdimension.de/postcards
 Requires at least: 2.8
 Tested up to: 3.0.3
-Stable tag: 0.6
+Stable tag: 0.7
 
 Little form that allows site visitors to contact you by email.
 
